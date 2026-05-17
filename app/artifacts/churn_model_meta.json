@@ -1,0 +1,196 @@
+{
+  "target": "Churn Value",
+  "features": [
+    {
+      "name": "Gender",
+      "kind": "categorical",
+      "options": [
+        "Female",
+        "Male"
+      ],
+      "default": "Female"
+    },
+    {
+      "name": "Senior Citizen",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Partner",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Dependents",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Tenure Months",
+      "kind": "numeric",
+      "min": 1.0,
+      "max": 72.0,
+      "default": 29.0,
+      "step": 1.0
+    },
+    {
+      "name": "Phone Service",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Multiple Lines",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "No phone service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Internet Service",
+      "kind": "categorical",
+      "options": [
+        "DSL",
+        "Fiber optic",
+        "No"
+      ],
+      "default": "DSL"
+    },
+    {
+      "name": "Online Security",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Online Backup",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Device Protection",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Tech Support",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Streaming TV",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Streaming Movies",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Contract",
+      "kind": "categorical",
+      "options": [
+        "Month-to-month",
+        "One year",
+        "Two year"
+      ],
+      "default": "Month-to-month"
+    },
+    {
+      "name": "Paperless Billing",
+      "kind": "categorical",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Payment Method",
+      "kind": "categorical",
+      "options": [
+        "Bank transfer (automatic)",
+        "Credit card (automatic)",
+        "Electronic check",
+        "Mailed check"
+      ],
+      "default": "Bank transfer (automatic)"
+    },
+    {
+      "name": "Monthly Charges",
+      "kind": "numeric",
+      "min": 18.25,
+      "max": 118.75,
+      "default": 70.35,
+      "step": 0.1
+    },
+    {
+      "name": "Total Charges",
+      "kind": "numeric",
+      "min": 18.8,
+      "max": 8684.8,
+      "default": 1397.475,
+      "step": 0.1
+    },
+    {
+      "name": "CLTV",
+      "kind": "numeric",
+      "min": 2003.0,
+      "max": 6500.0,
+      "default": 4527.5,
+      "step": 0.1
+    }
+  ],
+  "scoring": "roc_auc",
+  "cv_mean": 0.8451858373040478,
+  "cv_std": 0.011591560780915323,
+  "test_roc_auc": 0.8325576820537245
+}

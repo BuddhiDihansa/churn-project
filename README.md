@@ -1,10 +1,10 @@
-# 📊 Customer Churn Prediction System
+# Customer Churn Prediction System
 
 An end-to-end Machine Learning project to predict customer churn and provide actionable business insights using explainable AI.
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 Customer churn is a major challenge for telecom companies. This project builds a predictive model to identify customers likely to leave and explains the reasons behind their decisions.
 
@@ -21,7 +21,7 @@ Customer churn is a major challenge for telecom companies. This project builds a
 
 ---
 
-## 🧠 Technologies Used
+## Technologies Used
 
 - Python
 - Pandas
@@ -32,7 +32,7 @@ Customer churn is a major challenge for telecom companies. This project builds a
 
 ---
 
-## 🔍 Exploratory Data Analysis (EDA)
+## Exploratory Data Analysis (EDA)
 
 - Checked missing values and data types
 - Analyzed churn distribution
@@ -41,7 +41,7 @@ Customer churn is a major challenge for telecom companies. This project builds a
   - Monthly charges
   - Tenure
 
-📌 Key Insight:
+Key Insight:
 Customers with month-to-month contracts have a higher churn rate.
 
 ---
@@ -52,7 +52,7 @@ Customers with month-to-month contracts have a higher churn rate.
 - Fully interpretable model
 - Visualized decision rules
 
-📊 Evaluation:
+Evaluation:
 - Confusion Matrix
 - Precision, Recall, F1-score
 
@@ -66,14 +66,14 @@ Customers with month-to-month contracts have a higher churn rate.
   - StandardScaler (numerical)
 - Used RandomForestClassifier with class balancing
 
-📊 Evaluation:
+Evaluation:
 - Stratified 5-Fold Cross Validation
 - ROC-AUC Score
 - F1 Score
 
 ---
 
-## 🧠 Model Explainability (SHAP)
+## Model Explainability (SHAP)
 
 Used SHAP values to understand model predictions:
 
@@ -82,13 +82,13 @@ Used SHAP values to understand model predictions:
 - Local Explainability:
   - Individual prediction breakdown (waterfall plot)
 
-💡 Key Insight:
+Key Insight:
 - High monthly charges → higher churn risk
 - Long tenure → lower churn risk
 
 ---
 
-## 📈 Model Comparison
+## Model Comparison
 
 | Model          | ROC-AUC | F1 Score |
 |---------------|--------|---------|
@@ -108,3 +108,58 @@ This model helps businesses:
 ---
 
 ## 📁 Project Structure
+
+```text
+README.md
+requirements.txt
+app/
+  churn_utils.py
+  train_model.py
+  streamlit_app.py
+  artifacts/
+    churn_model.pkl
+    churn_model_meta.json
+data/
+  Telco_customer_churn.xlsx
+notebooks/
+  01_EDA.ipynb
+  02_baseline_DT.ipynb
+  03_RF_pipeline.ipynb
+  04_SHAP.ipynb
+```
+
+---
+
+## Connected End-to-End Workflow
+
+1. Install dependencies:
+
+```bash
+C:/Users/ishar/AppData/Local/Programs/Python/Python312/python.exe -m pip install -r requirements.txt
+```
+
+2. Train and save the production model + metadata used by Streamlit:
+
+```bash
+C:/Users/ishar/AppData/Local/Programs/Python/Python312/python.exe app/train_model.py
+```
+
+3. Run the app:
+
+```bash
+C:/Users/ishar/AppData/Local/Programs/Python/Python312/python.exe -m streamlit run app/streamlit_app.py
+```
+
+4. Optional notebook flow (now aligned with the app pipeline):
+- Run `01_EDA.ipynb` for exploration.
+- Run `02_baseline_DT.ipynb` for a baseline model.
+- Run `03_RF_pipeline.ipynb` to build and export the same artifacts used by the app.
+- Run `04_SHAP.ipynb` to explain the saved model from `app/artifacts/churn_model.pkl`.
+
+---
+
+## Current Model Result
+
+From the latest training run:
+- Cross-validation ROC-AUC: `0.8452 ± 0.0116`
+- Test ROC-AUC: `0.8326`

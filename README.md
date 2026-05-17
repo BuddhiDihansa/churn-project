@@ -1,113 +1,37 @@
 # Customer Churn Prediction System
 
-An end-to-end Machine Learning project to predict customer churn and provide actionable business insights using explainable AI.
+An end-to-end machine learning project that predicts customer churn and explains the main drivers behind each prediction through an interactive Streamlit dashboard.
 
----
+## Overview
 
-## Project Overview
+Customer churn is a critical business problem for telecom providers. This project builds a production-style pipeline that trains a churn classifier, saves the model artifacts, and exposes the results through a clean user interface with probability visualization and SHAP-based explainability.
 
-Customer churn is a major challenge for telecom companies. This project builds a predictive model to identify customers likely to leave and explains the reasons behind their decisions.
+## Key Features
 
----
+- Churn probability prediction using a trained scikit-learn pipeline
+- Interactive Streamlit dashboard for customer-level analysis
+- Percentage donut chart to visualize churn likelihood
+- SHAP explanations for local feature contributions
+- Reproducible training script that regenerates the model and metadata
 
-## 📂 Dataset
+## Dataset
 
-- IBM Telco Customer Churn Dataset
-- ~7,000 customers
-- 20+ features including:
-  - Demographics
-  - Account information
-  - Services subscribed
+- IBM Telco Customer Churn dataset
+- Approximately 7,000 customer records
+- Features include demographics, account information, service subscriptions, and billing details
 
----
-
-## Technologies Used
+## Tech Stack
 
 - Python
 - Pandas
 - NumPy
-- Scikit-learn
-- Matplotlib / Seaborn
-- SHAP (Explainable AI)
+- scikit-learn
+- Matplotlib
+- Streamlit
+- SHAP
+- openpyxl
 
----
-
-## Exploratory Data Analysis (EDA)
-
-- Checked missing values and data types
-- Analyzed churn distribution
-- Identified patterns in:
-  - Contract type
-  - Monthly charges
-  - Tenure
-
-Key Insight:
-Customers with month-to-month contracts have a higher churn rate.
-
----
-
-## 🌳 Baseline Model — Decision Tree
-
-- Built a simple Decision Tree classifier
-- Fully interpretable model
-- Visualized decision rules
-
-Evaluation:
-- Confusion Matrix
-- Precision, Recall, F1-score
-
----
-
-## 🌲 Advanced Model — Random Forest Pipeline
-
-- Built a full ML pipeline using:
-  - ColumnTransformer
-  - OneHotEncoding (categorical)
-  - StandardScaler (numerical)
-- Used RandomForestClassifier with class balancing
-
-Evaluation:
-- Stratified 5-Fold Cross Validation
-- ROC-AUC Score
-- F1 Score
-
----
-
-## Model Explainability (SHAP)
-
-Used SHAP values to understand model predictions:
-
-- Global Explainability:
-  - Feature importance (summary plot)
-- Local Explainability:
-  - Individual prediction breakdown (waterfall plot)
-
-Key Insight:
-- High monthly charges → higher churn risk
-- Long tenure → lower churn risk
-
----
-
-## Model Comparison
-
-| Model          | ROC-AUC | F1 Score |
-|---------------|--------|---------|
-| Decision Tree | 0.XX   | 0.XX    |
-| Random Forest | 0.XX   | 0.XX    |
-
----
-
-## 💼 Business Impact
-
-This model helps businesses:
-
-- Identify high-risk customers
-- Design targeted retention strategies
-- Reduce customer churn and increase revenue
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```text
 README.md
@@ -128,38 +52,100 @@ notebooks/
   04_SHAP.ipynb
 ```
 
----
+## Setup
 
-## Connected End-to-End Workflow
+1. Create and activate your virtual environment.
 
-1. Install dependencies:
-
-```bash
-C:/Users/ishar/AppData/Local/Programs/Python/Python312/python.exe -m pip install -r requirements.txt
-```
-
-2. Train and save the production model + metadata used by Streamlit:
+2. Install dependencies:
 
 ```bash
-C:/Users/ishar/AppData/Local/Programs/Python/Python312/python.exe app/train_model.py
+python -m pip install -r requirements.txt
 ```
 
-3. Run the app:
+If you are using the project virtual environment on Windows, you can also run:
 
 ```bash
-C:/Users/ishar/AppData/Local/Programs/Python/Python312/python.exe -m streamlit run app/streamlit_app.py
+.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-4. Optional notebook flow (now aligned with the app pipeline):
-- Run `01_EDA.ipynb` for exploration.
-- Run `02_baseline_DT.ipynb` for a baseline model.
-- Run `03_RF_pipeline.ipynb` to build and export the same artifacts used by the app.
-- Run `04_SHAP.ipynb` to explain the saved model from `app/artifacts/churn_model.pkl`.
+## Train the Model
 
----
+Run the training script to regenerate the model and metadata used by the app:
 
-## Current Model Result
+```bash
+python app/train_model.py
+```
 
-From the latest training run:
-- Cross-validation ROC-AUC: `0.8452 ± 0.0116`
-- Test ROC-AUC: `0.8326`
+This step reads the Excel dataset, prepares the features, trains the pipeline, evaluates it, and saves:
+
+- `app/artifacts/churn_model.pkl`
+- `app/artifacts/churn_model_meta.json`
+
+## Run the Streamlit App
+
+Start the dashboard with:
+
+```bash
+streamlit run app/streamlit_app.py
+```
+
+If you want to use the project virtual environment directly on Windows:
+
+```bash
+.venv\Scripts\python.exe -m streamlit run app/streamlit_app.py
+```
+
+## What the App Shows
+
+- Customer input form grouped by profile, services, billing, and value indicators
+- Churn probability output
+- Risk band and percentage chart
+- SHAP explanation for the selected prediction
+- Downloadable JSON report for the current prediction
+
+## Model Notes
+
+The final model is a Random Forest classifier wrapped in a preprocessing pipeline with:
+
+- SimpleImputer for missing values
+- StandardScaler for numeric features
+- OneHotEncoder for categorical features
+
+Latest reported performance from the training script:
+
+- Cross-validation ROC-AUC: 0.8452 +/- 0.0116
+- Test ROC-AUC: 0.8326
+
+## Business Value
+
+This project helps teams:
+
+- Identify high-risk customers earlier
+- Prioritize retention campaigns
+- Explain why a customer is at risk of leaving
+- Support data-driven decision-making with a visual dashboard
+
+## Notebooks
+
+The notebooks in the `notebooks/` folder document the exploratory and modeling workflow:
+
+- `01_EDA.ipynb` for exploration
+- `02_baseline_DT.ipynb` for the decision tree baseline
+- `03_RF_pipeline.ipynb` for the random forest pipeline
+- `04_SHAP.ipynb` for explainability analysis
+
+## Requirements
+
+The project depends on the packages listed in `requirements.txt`, including:
+
+- streamlit
+- pandas
+- numpy
+- scikit-learn
+- matplotlib
+- openpyxl
+- shap
+
+## License
+
+No license has been added yet. If you plan to publish the repository publicly, add a license file before sharing it broadly.
